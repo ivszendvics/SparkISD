@@ -1,0 +1,25 @@
+# How the pipeline finds the three daily Power BI emails.
+# See docs/LIVE_SETUP.md step 1: copy the real From: address from Gmail "Show original".
+
+sender:
+  display_name: "Microsoft Power BI"
+  # REQUIRED for live mode. Do not guess it - copy it from "Show original".
+  # Live mode refuses to run while this is null. Mock mode checks only the display name.
+  address: no-reply-powerbi@microsoft.com
+
+# Exact subject -> division. The division always comes from the subject, never the file name
+# (Gmail truncates attachment names to "Permit Inspecti...").
+subjects:
+  "Permit Inspection Request - Building Summary": Building
+  "Permit Inspection Request - Electric Summary": Electric
+  "Permit Inspection Request - Plumbing/Gas Summary": Plumbing/Gas
+
+has_attachment: true
+allowed_extensions: [".xlsx", ".xlsm"]
+
+# Optional Gmail label (recommended, see LIVE_SETUP step 2). null = search the whole mailbox.
+label: null
+
+# Gmail's after:/before: operators work on whole days, so we search one day either side
+# and then re-check received_at in code against the America/New_York report day.
+search_padding_days: 1

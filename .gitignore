@@ -1,0 +1,17 @@
+# Credentials - NEVER commit these
+secrets/*
+!secrets/README.md
+credentials.json
+token.json
+
+# Local data (mock inbox/Drive contain synthetic data, regenerated on demand)
+demo_data/
+pipeline_cron.log
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.streamlit/secrets.toml
+.DS_Store

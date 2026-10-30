@@ -1,0 +1,75 @@
+{
+  "by_division": [
+    {
+      "denominator": 170,
+      "division": "Building",
+      "numerator": 101,
+      "on_time_pct": 59.4
+    },
+    {
+      "denominator": 148,
+      "division": "Electric",
+      "numerator": 81,
+      "on_time_pct": 54.7
+    },
+    {
+      "denominator": 163,
+      "division": "Plumbing/Gas",
+      "numerator": 88,
+      "on_time_pct": 54.0
+    }
+  ],
+  "dq_summary": [
+    {
+      "count": 24,
+      "dq_flag": "closed_in_report_gap"
+    },
+    {
+      "count": 23,
+      "dq_flag": "report_gap"
+    },
+    {
+      "count": 2,
+      "dq_flag": "review_flag_upstream"
+    }
+  ],
+  "mismatch_by_reason": [
+    {
+      "count": 36,
+      "mismatch_reason": "excused_by_note"
+    },
+    {
+      "count": 90,
+      "mismatch_reason": "calendar_adjustment"
+    },
+    {
+      "count": 1,
+      "mismatch_reason": "missed_by_source"
+    },
+    {
+      "count": 0,
+      "mismatch_reason": "other_red_not_late"
+    }
+  ],
+  "summary": {
+    "denominator": 481,
+    "dq_flagged_requests": 49,
+    "duplicates_collapsed": 946,
+    "ever_red_requests": 380,
+    "font_mismatches": 127,
+    "invalid": 0,
+    "late": 163,
+    "latest_as_of": "2026-10-20",
+    "median_business_days_late_backlog": 2.0,
+    "numerator": 270,
+    "on_time": 234,
+    "on_time_contacted": 36,
+    "on_time_pct": 56.1,
+    "open_not_due": 60,
+    "open_overdue": 48,
+    "open_overdue_backlog": 48,
+    "review_queue": 2,
+    "snapshot_rows_ingested": 1492,
+    "unique_requests": 546
+  }
+}

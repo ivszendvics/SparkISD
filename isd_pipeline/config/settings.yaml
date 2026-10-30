@@ -1,0 +1,59 @@
+# ISD Permit Inspection Automation - main settings.
+# Paths are relative to the project root (the folder that contains isd_pipeline/).
+
+mode: live                      # mock | live   (CLI flags --mock / --live override this)
+timezone: America/New_York      # report_date is the received date in this timezone
+
+storage:
+  root_folder_name: "Permit Inspection Automation"
+  mock_drive_dir: demo_data/mock_drive     # local folder that mirrors the Drive tree
+
+email:
+  mock_inbox_dir: demo_data/mock_inbox     # demo/generate_synthetic.py writes here
+
+live:
+  credentials_file: secrets/credentials.json   # OAuth "Desktop app" client from Google Cloud
+  token_file: secrets/token.json               # written by `python -m isd_pipeline.auth`
+
+schedule:
+  run_time: "07:45"             # local time (America/New_York). Emails usually arrive ~07:03.
+
+parser:
+  header_scan_rows: 30          # how many top rows to scan for the real header row
+  min_header_matches: 4         # a header row must match at least this many known columns
+
+late_logic:
+  strict_holidays: true         # false (or CLI --lenient) = flag rows instead of raising
+  long_open_business_days: 30   # dq flag `long_open` above this
+
+aggregation:
+  low_n_threshold: 10           # groups with fewer judged requests get low_n = true
+
+exports:
+  include_contact_fields: false # contact_name/contact_info are personal data; off by default
+
+retry:
+  max_attempts: 4
+  base_delay_seconds: 1.0       # exponential backoff: 1s, 2s, 4s ...
+
+dedupe:
+  # Address abbreviations, applied word-by-word after upper-casing. Long form -> short form.
+  address_abbreviations:
+    STREET: ST
+    AVENUE: AVE
+    ROAD: RD
+    BOULEVARD: BLVD
+    PLACE: PL
+    SQUARE: SQ
+    TERRACE: TER
+    PARKWAY: PKWY
+    DRIVE: DR
+    COURT: CT
+    LANE: LN
+    HIGHWAY: HWY
+    CIRCLE: CIR
+    HEIGHTS: HTS
+    NORTH: N
+    SOUTH: S
+    EAST: E
+    WEST: W

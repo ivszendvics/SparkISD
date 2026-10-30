@@ -1,0 +1,44 @@
+# Header aliases -> canonical column names.
+# Matching ignores case, spaces and punctuation ("Ap #" == "ap#" == "AP  #").
+
+required_columns: [inspector, call_datetime, ap_number, address, insp_type]
+
+# The Call Date cell is where the source system paints late rows red.
+red_font_column: call_datetime
+
+aliases:
+  inspector:       ["Inspector", "Inspector Name", "Assigned Inspector"]
+  ward:            ["Ward"]
+  call_datetime:   ["Call Date", "Call Datetime", "Call Date Time", "Date Called"]
+  ap_number:       ["Ap #", "Ap Number", "AP No", "Application #", "Application Number", "Permit #", "Permit Number"]
+  address:         ["Address", "Property Address", "Location Address"]
+  insp_type:       ["Insp Type", "Inspection Type"]
+  work_group:      ["Work Group", "Workgroup"]
+  contact_name:    ["Contact Name"]
+  contact_info:    ["Contact Info", "Contact Phone", "Contact Information"]
+  request_notes:   ["Request Notes", "Requestor Notes"]
+  inspector_notes: ["Inspector Notes", "Insp Notes", "Inspector Comments"]
+  fulfilled_late:  ["FullFilled Late", "Fulfilled Late"]
+
+# Text call dates are tried with these formats first, then a general parser.
+call_datetime_formats:
+  - "%m/%d/%Y %I:%M:%S %p"
+  - "%m/%d/%Y %I:%M %p"
+  - "%m/%d/%Y %H:%M:%S"
+  - "%m/%d/%Y %H:%M"
+  - "%Y-%m-%d %H:%M:%S"
+  - "%Y-%m-%d %H:%M"
+  - "%m/%d/%Y"
+  - "%Y-%m-%d"
+
+# Rows whose first text cell starts with one of these are subtotal rows (they end a group).
+total_row_prefixes: ["total", "grand total", "count of", "subtotal"]
+
+# Per-division differences between the three reports. Aliases here are ADDED to the defaults.
+division_overrides:
+  Building: {}
+  Electric: {}
+  Plumbing/Gas:
+    aliases:
+      call_datetime: ["Call Date/Time"]
+      ap_number: ["Application No"]
